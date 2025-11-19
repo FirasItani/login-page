@@ -1,8 +1,5 @@
 /** @format */
 
-// ...existing code...
-/** @format */
-
 const express = require("express");
 const fs = require("fs");
 const path = require("path");
@@ -32,8 +29,13 @@ app.post("/save-code", (req, res) => {
   });
 });
 
+app.use(express.static(path.join(__dirname, "dist")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "dist", "index.html"));
+});
+
 const PORT = 5000;
 app.listen(PORT, () =>
   console.log(`Server listening http://localhost:${PORT}`)
 );
-// ...existing code...
